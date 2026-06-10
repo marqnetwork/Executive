@@ -92,7 +92,7 @@ export default function SalesPage() {
                   <p className="font-medium">{s.source}</p>
                   <p className="text-xs text-muted">{s.leads} leads · {s.sales} sales</p>
                 </div>
-                <span className="font-semibold text-gold-light">${Math.round(s.revenue / 1000)}K</span>
+                <span className="font-semibold text-accent-light">${Math.round(s.revenue / 1000)}K</span>
               </div>
             ))}
           </div>
@@ -107,7 +107,7 @@ export default function SalesPage() {
             </div>
             <div className="glass-inset p-4">
               <p className="text-xs text-muted">Lost Revenue</p>
-              <p className="mt-1 text-2xl font-semibold text-gold-light">${Math.round(lostOpportunities.lostRevenue / 1000)}K</p>
+              <p className="mt-1 text-2xl font-semibold text-accent-light">${Math.round(lostOpportunities.lostRevenue / 1000)}K</p>
             </div>
           </div>
           <div className="mt-4">

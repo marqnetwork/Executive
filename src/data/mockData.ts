@@ -352,8 +352,8 @@ export interface TeamMember {
 export const teamMembers: TeamMember[] = [
   {
     id: "u1",
-    name: "Karen Thompson",
-    email: "karen@tailoredcloset.com",
+    name: "Owner",
+    email: "owner@tailoredcloset.com",
     phone: "(555) 100-0001",
     role: "Owner",
     status: "Active",

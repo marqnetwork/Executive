@@ -10,7 +10,7 @@ import { healthScores, revenueTrend, successionMetrics, teamMembers, TeamMember 
 import { AlertCircle, DollarSign, Percent, Target, Users, X } from "lucide-react";
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
-const CHART_GOLD = "#d4af37";
+import { CHART_TEAL } from "@/lib/theme";
 
 const designers = teamMembers.filter((m) => m.role === "Designer");
 const totalRevenue = designers.reduce((s, m) => s + m.revenue, 0);
@@ -47,7 +47,7 @@ export default function TeamPage() {
             {leaderboard.map((member, idx) => (
               <div key={member.id} className="list-row !py-3">
                 <div className="flex items-center gap-3">
-                  <span className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold ${idx === 0 ? "bg-gold/20 text-gold-light" : "glass-inset"}`}>
+                  <span className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold ${idx === 0 ? "bg-accent/20 text-accent-light" : "glass-inset"}`}>
                     {idx + 1}
                   </span>
                   <div>
@@ -55,7 +55,7 @@ export default function TeamPage() {
                     <p className="text-xs text-muted">{member.closeRate}% close · {member.activeProjects} projects</p>
                   </div>
                 </div>
-                <p className="font-semibold text-gold-light">${Math.round(member.revenue / 1000)}K</p>
+                <p className="font-semibold text-accent-light">${Math.round(member.revenue / 1000)}K</p>
               </div>
             ))}
           </div>
@@ -69,7 +69,7 @@ export default function TeamPage() {
                 <XAxis dataKey="name" axisLine={false} tickLine={false} />
                 <YAxis axisLine={false} tickLine={false} tickFormatter={(v) => `$${v / 1000}K`} width={44} />
                 <Tooltip formatter={(v) => [`$${Number(v).toLocaleString()}`, "Revenue"]} />
-                <Bar dataKey="revenue" fill={CHART_GOLD} radius={[6, 6, 0, 0]} />
+                <Bar dataKey="revenue" fill={CHART_TEAL} radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -116,7 +116,7 @@ export default function TeamPage() {
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
           <div className="glass-inset p-4">
             <p className="text-xs text-muted">Revenue Without Owner</p>
-            <p className="mt-1 text-2xl font-semibold text-gold-light">${Math.round(successionMetrics.revenueWithoutOwner / 1000)}K</p>
+            <p className="mt-1 text-2xl font-semibold text-accent-light">${Math.round(successionMetrics.revenueWithoutOwner / 1000)}K</p>
             <p className="text-xs text-muted">{successionMetrics.revenueWithoutOwnerPct}% of total</p>
           </div>
           <div className="glass-inset p-4">
@@ -130,7 +130,7 @@ export default function TeamPage() {
           </div>
           <div className="glass-health p-4">
             <p className="text-xs text-muted">Independence Score</p>
-            <p className="mt-1 text-3xl font-semibold text-gold-light">{successionMetrics.businessIndependenceScore}</p>
+            <p className="mt-1 text-3xl font-semibold text-accent-light">{successionMetrics.businessIndependenceScore}</p>
             <p className="text-xs text-muted">out of 100</p>
           </div>
         </div>
@@ -147,7 +147,7 @@ export default function TeamPage() {
               </div>
               <div className="flex items-center gap-3">
                 <span className={`badge ${m.status === "Active" ? "badge-success" : "badge-warning"}`}>{m.status}</span>
-                <button onClick={() => setProfile(m)} className="text-sm text-gold-light hover:underline">Profile</button>
+                <button onClick={() => setProfile(m)} className="text-sm text-accent-light hover:underline">Profile</button>
               </div>
             </div>
           ))}
@@ -161,7 +161,7 @@ export default function TeamPage() {
             <div className="border-b border-glassBorder p-6">
               <div className="flex items-start justify-between">
                 <div>
-                  <h3 className="font-serif text-2xl">{profile.name}</h3>
+                  <h3 className="text-2xl font-bold">{profile.name}</h3>
                   <p className="mt-1 text-muted">{profile.role}</p>
                 </div>
                 <button onClick={() => setProfile(null)} className="btn-ghost !p-2"><X size={20} /></button>
@@ -177,7 +177,7 @@ export default function TeamPage() {
                 <section>
                   <h4 className="text-xs font-medium uppercase tracking-wider text-muted">Performance</h4>
                   <div className="mt-3 grid grid-cols-2 gap-2">
-                    <div className="glass-inset p-3"><p className="text-muted">Revenue</p><p className="font-semibold text-gold-light">${Math.round(profile.revenue / 1000)}K</p></div>
+                    <div className="glass-inset p-3"><p className="text-muted">Revenue</p><p className="font-semibold text-accent-light">${Math.round(profile.revenue / 1000)}K</p></div>
                     <div className="glass-inset p-3"><p className="text-muted">Close Rate</p><p className="font-semibold">{profile.closeRate}%</p></div>
                     <div className="glass-inset p-3"><p className="text-muted">Projects</p><p className="font-semibold">{profile.activeProjects}</p></div>
                     <div className="glass-inset p-3"><p className="text-muted">Capacity</p><p className="font-semibold">{profile.capacity}%</p></div>

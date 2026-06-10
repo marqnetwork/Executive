@@ -1,5 +1,6 @@
 import { LucideIcon } from "lucide-react";
 import { SparklineChart } from "./SparklineChart";
+import { CHART_MAGENTA, CHART_TEAL } from "@/lib/theme";
 
 export function MetricCard({
   label,
@@ -29,20 +30,20 @@ export function MetricCard({
         <div
           className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl shadow-inset ${
             accent
-              ? "bg-gradient-to-br from-gold/30 to-gold/10 text-gold-bright ring-1 ring-gold/30"
-              : "bg-gradient-to-br from-white/10 to-white/3 text-gold-light ring-1 ring-white/10"
+              ? "bg-gradient-to-br from-accent/30 to-accent/10 text-accent-bright ring-1 ring-accent/30"
+              : "bg-gradient-to-br from-white/8 to-white/3 text-accent-light ring-1 ring-white/8"
           }`}
         >
           <Icon size={18} strokeWidth={1.75} />
         </div>
         {sparkData && sparkData.length > 1 && (
           <div className="h-9 w-20 opacity-80 transition-opacity group-hover:opacity-100">
-            <SparklineChart data={sparkData} color={accent ? "#f0cc5a" : "#d4af37"} />
+            <SparklineChart data={sparkData} color={accent ? CHART_TEAL : CHART_MAGENTA} />
           </div>
         )}
       </div>
       <p className="relative z-[1] mt-3 text-xs font-semibold uppercase tracking-wide text-muted">{label}</p>
-      <p className={`relative z-[1] mt-1 text-2xl font-bold tracking-tight sm:text-3xl ${accent ? "text-gold-bright" : "text-primary"}`}>
+      <p className={`relative z-[1] mt-1 text-2xl font-bold tracking-tight sm:text-3xl ${accent ? "text-accent-bright" : "text-primary"}`}>
         {value}
       </p>
       <p className={`relative z-[1] mt-1.5 text-xs font-semibold ${isPositive ? "text-success" : isNegative ? "text-attention" : "text-muted"}`}>

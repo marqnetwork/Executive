@@ -77,7 +77,7 @@ export default function ProjectsPage() {
                       <p className="mt-0.5 text-[10px] text-muted">{project.type}</p>
                       <div className="mt-2 flex items-center justify-between text-[10px]">
                         <span className="text-muted">{project.designer}</span>
-                        <span className="font-semibold text-gold-light">{project.valueDisplay}</span>
+                        <span className="font-semibold text-accent-light">{project.valueDisplay}</span>
                       </div>
                       <div className="mt-2 flex items-center justify-between">
                         <StatusBadge status={project.status} />
@@ -117,7 +117,7 @@ export default function ProjectsPage() {
                   <p className="font-medium">{p.client}</p>
                   <p className="text-xs text-muted">{p.type}</p>
                 </div>
-                <span className="font-semibold text-gold-light">{p.installDate}</span>
+                <span className="font-semibold text-accent-light">{p.installDate}</span>
               </button>
             ))}
           </div>

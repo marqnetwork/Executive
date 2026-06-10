@@ -1,12 +1,11 @@
 "use client";
 
 import { Line, LineChart, ResponsiveContainer } from "recharts";
-
-const CHART_GOLD = "#d4af37";
+import { CHART_TEAL } from "@/lib/theme";
 
 export function SparklineChart({
   data,
-  color = CHART_GOLD,
+  color = CHART_TEAL,
   height = 36,
 }: {
   data: number[];
@@ -16,7 +15,7 @@ export function SparklineChart({
   const chartData = data.map((value, index) => ({ index, value }));
 
   return (
-    <div className="w-full drop-shadow-[0_0_6px_rgba(212,175,55,0.4)]" style={{ height }}>
+    <div className="w-full drop-shadow-[0_0_6px_rgba(0,242,234,0.4)]" style={{ height }}>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={chartData}>
           <Line

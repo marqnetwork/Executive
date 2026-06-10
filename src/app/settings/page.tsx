@@ -46,12 +46,12 @@ export default function SettingsPage() {
         <GlassCard>
           <SectionHeader title="Company Profile" />
           <div className="mb-6 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-            <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-gold to-gold/60 font-serif text-2xl text-navy shadow-gold">
+            <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-accent/60 text-2xl font-bold text-navy shadow-teal">
               TC
             </div>
             <div>
               <p className="text-sm text-muted">Company Logo</p>
-              <button className="mt-2 text-sm text-gold-light hover:underline">Upload Logo</button>
+              <button className="mt-2 text-sm text-accent-light hover:underline">Upload Logo</button>
             </div>
           </div>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -85,7 +85,7 @@ export default function SettingsPage() {
         <GlassCard>
           <SectionHeader
             title="User Management"
-            action={<button className="btn-gold text-sm">Add User</button>}
+            action={<button className="btn-primary text-sm">Add User</button>}
           />
           <div className="space-y-2">
             {teamMembers.map((m) => (
@@ -101,7 +101,7 @@ export default function SettingsPage() {
                   <option value="Operations">Operations</option>
                 </select>
                 <span className={`badge ${m.status === "Active" ? "badge-success" : "badge-warning"}`}>{m.status}</span>
-                <button className="text-sm text-gold-light hover:underline">Edit</button>
+                <button className="text-sm text-accent-light hover:underline">Edit</button>
               </div>
             ))}
           </div>
@@ -161,7 +161,7 @@ function Field({ label, value, onChange, className = "" }: { label: string; valu
 
 function SaveButton({ onClick }: { onClick: () => void }) {
   return (
-    <button onClick={onClick} className="btn-gold mt-6 flex items-center gap-2 text-sm">
+    <button onClick={onClick} className="btn-primary mt-6 flex items-center gap-2 text-sm">
       <Save size={16} />
       Save Changes
     </button>

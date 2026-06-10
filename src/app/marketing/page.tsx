@@ -10,8 +10,7 @@ import { healthScores, marketingRecommendations, marketingSources, revenueTrend 
 import { DollarSign, Megaphone, Target, TrendingUp, Users, Zap } from "lucide-react";
 import { Bar, BarChart, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
-const COLORS = ["#d4af37", "#2dd4a0", "#fbbf24", "#818cf8", "#fb7185", "#a78bfa"];
-const CHART_GOLD = "#d4af37";
+import { CHART_PALETTE, CHART_TEAL } from "@/lib/theme";
 
 export default function MarketingPage() {
   const totalSpend = marketingSources.reduce((sum, s) => sum + s.spend, 0);
@@ -62,7 +61,7 @@ export default function MarketingPage() {
                 <XAxis dataKey="source" axisLine={false} tickLine={false} tick={{ fontSize: 10 }} />
                 <YAxis axisLine={false} tickLine={false} tickFormatter={(v) => `$${v / 1000}K`} width={44} />
                 <Tooltip formatter={(v) => [`$${Number(v).toLocaleString()}`, "Revenue"]} />
-                <Bar dataKey="revenue" fill={CHART_GOLD} radius={[6, 6, 0, 0]} />
+                <Bar dataKey="revenue" fill={CHART_TEAL} radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -75,7 +74,7 @@ export default function MarketingPage() {
               <PieChart>
                 <Pie data={leadDistribution} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={45} outerRadius={72} paddingAngle={2}>
                   {leadDistribution.map((_, i) => (
-                    <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                    <Cell key={i} fill={CHART_PALETTE[i % CHART_PALETTE.length]} />
                   ))}
                 </Pie>
                 <Tooltip />
@@ -85,7 +84,7 @@ export default function MarketingPage() {
           <div className="mt-2 flex flex-wrap gap-2">
             {leadDistribution.map((d, i) => (
               <span key={d.name} className="flex items-center gap-1 text-[10px] text-muted">
-                <span className="h-1.5 w-1.5 rounded-full" style={{ background: COLORS[i % COLORS.length] }} />
+                <span className="h-1.5 w-1.5 rounded-full" style={{ background: CHART_PALETTE[i % CHART_PALETTE.length] }} />
                 {d.name} ({d.value})
               </span>
             ))}
@@ -112,7 +111,7 @@ export default function MarketingPage() {
                     <td className="p-3 font-medium">{r.source}</td>
                     <td className="p-3 text-muted">${r.spend.toLocaleString()}</td>
                     <td className="p-3 text-muted">${r.revenue.toLocaleString()}</td>
-                    <td className="p-3 font-semibold text-gold-light">{r.roi}x</td>
+                    <td className="p-3 font-semibold text-accent-light">{r.roi}x</td>
                   </tr>
                 ))}
               </tbody>
@@ -129,7 +128,7 @@ export default function MarketingPage() {
                   <p className="font-medium">{s.source}</p>
                   <p className="text-xs text-muted">{s.leads} leads · {s.consultations} consults · {s.sales} sales</p>
                 </div>
-                <span className="badge badge-gold">{s.sales > 0 ? `${Math.round((s.sales / s.leads) * 100)}%` : "—"}</span>
+                <span className="badge badge-accent">{s.sales > 0 ? `${Math.round((s.sales / s.leads) * 100)}%` : "—"}</span>
               </div>
             ))}
           </div>

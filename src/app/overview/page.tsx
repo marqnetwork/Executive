@@ -31,7 +31,10 @@ import {
   Percent,
   Users,
 } from "lucide-react";
+import { CHART_MAGENTA, CHART_TEAL } from "@/lib/theme";
 import {
+  Area,
+  AreaChart,
   Line,
   LineChart,
   PolarAngleAxis,
@@ -43,9 +46,6 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-
-const CHART_GOLD = "#d4af37";
-const CHART_BLUE = "#818cf8";
 
 export default function OverviewPage() {
   const trend = revenueTrend.slice(-6).map((r) => r.revenue);
@@ -75,7 +75,7 @@ export default function OverviewPage() {
   return (
     <AppShell>
       <PageHeader
-        welcome="Welcome back, Karen 👋"
+        welcome="Welcome back 👋"
         welcomeSubtitle="Here's your business overview for June 2026"
       />
 
@@ -106,7 +106,7 @@ export default function OverviewPage() {
           <div className="mb-4 flex flex-wrap items-end gap-6">
             <div>
               <p className="text-xs uppercase tracking-wide text-muted">Current Month</p>
-              <p className="text-3xl font-semibold text-gold-light sm:text-4xl">
+              <p className="text-3xl font-semibold text-accent-light sm:text-4xl">
                 ${currentRevenue.toLocaleString()}
               </p>
             </div>
@@ -117,12 +117,18 @@ export default function OverviewPage() {
           </div>
           <div className="h-[220px] min-h-[180px] w-full">
             <ResponsiveContainer width="100%" height="100%" minHeight={180}>
-              <LineChart data={revenueTrend}>
+              <AreaChart data={revenueTrend}>
+                <defs>
+                  <linearGradient id="revenueGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor={CHART_TEAL} stopOpacity={0.35} />
+                    <stop offset="100%" stopColor={CHART_TEAL} stopOpacity={0} />
+                  </linearGradient>
+                </defs>
                 <XAxis dataKey="month" axisLine={false} tickLine={false} />
                 <YAxis axisLine={false} tickLine={false} tickFormatter={(v) => `$${v / 1000}K`} width={48} />
                 <Tooltip formatter={(v) => [`$${Number(v).toLocaleString()}`, "Revenue"]} />
-                <Line type="monotone" dataKey="revenue" stroke={CHART_GOLD} strokeWidth={2.5} dot={false} />
-              </LineChart>
+                <Area type="monotone" dataKey="revenue" stroke={CHART_TEAL} strokeWidth={2.5} fill="url(#revenueGrad)" dot={false} />
+              </AreaChart>
             </ResponsiveContainer>
           </div>
         </GlassCard>
@@ -134,7 +140,7 @@ export default function OverviewPage() {
               <RadarChart data={businessHealthBreakdown} cx="50%" cy="50%" outerRadius="70%">
                 <PolarGrid stroke="rgba(255,255,255,0.08)" />
                 <PolarAngleAxis dataKey="area" tick={{ fill: "rgba(240,237,232,0.5)", fontSize: 10 }} />
-                <Radar dataKey="score" stroke={CHART_GOLD} fill={CHART_GOLD} fillOpacity={0.2} strokeWidth={2} />
+                <Radar dataKey="score" stroke={CHART_TEAL} fill={CHART_TEAL} fillOpacity={0.2} strokeWidth={2} />
                 <Tooltip />
               </RadarChart>
             </ResponsiveContainer>
@@ -143,7 +149,7 @@ export default function OverviewPage() {
             {businessHealthBreakdown.map((item) => (
               <div key={item.area} className="glass-inset px-3 py-2 text-center">
                 <p className="text-[10px] uppercase tracking-wide text-muted">{item.area}</p>
-                <p className="text-lg font-semibold text-gold-light">{item.score}</p>
+                <p className="text-lg font-semibold text-accent-light">{item.score}</p>
               </div>
             ))}
           </div>
@@ -166,8 +172,8 @@ export default function OverviewPage() {
                   <p className="text-xs text-muted">{p.type}</p>
                 </div>
                 <div className="shrink-0 text-right">
-                  <p className="font-semibold text-gold-light">{p.valueDisplay}</p>
-                  <span className="badge badge-gold mt-1">{p.stage}</span>
+                  <p className="font-semibold text-accent-light">{p.valueDisplay}</p>
+                  <span className="badge badge-accent mt-1">{p.stage}</span>
                 </div>
               </div>
             ))}
@@ -201,13 +207,13 @@ export default function OverviewPage() {
                     cy="50"
                     r="42"
                     fill="none"
-                    stroke={CHART_GOLD}
+                    stroke={CHART_TEAL}
                     strokeWidth="8"
                     strokeDasharray={`${topPerformer.closeRate * 2.64} 264`}
                     strokeLinecap="round"
                   />
                 </svg>
-                <span className="text-xl font-semibold text-gold-light">{topPerformer.closeRate}%</span>
+                <span className="text-xl font-semibold text-accent-light">{topPerformer.closeRate}%</span>
               </div>
               <p className="mt-3 font-medium">{topPerformer.name}</p>
               <p className="text-sm text-muted">{topPerformer.sales} deals closed · ${Math.round(topPerformer.revenue / 1000)}K revenue</p>
@@ -217,7 +223,7 @@ export default function OverviewPage() {
             {designers.slice(0, 3).map((d, i) => (
               <div key={d.name} className="flex items-center justify-between text-sm">
                 <span className="text-muted">{i + 1}. {d.name}</span>
-                <span className="font-medium text-gold-light">{d.revenue}</span>
+                <span className="font-medium text-accent-light">{d.revenue}</span>
               </div>
             ))}
           </div>
@@ -232,7 +238,7 @@ export default function OverviewPage() {
             </div>
             <div className="glass-inset flex items-center justify-between px-4 py-3">
               <span className="text-sm text-muted">Google Ads Leads</span>
-              <span className="font-semibold text-gold-light">{marketingSnapshotMetrics.googleAdsLeads}</span>
+              <span className="font-semibold text-accent-light">{marketingSnapshotMetrics.googleAdsLeads}</span>
             </div>
             <div className="glass-inset flex items-center justify-between px-4 py-3">
               <span className="text-sm text-muted">Lead-to-Consultation</span>
@@ -246,7 +252,7 @@ export default function OverviewPage() {
           <div className="mt-3 h-16 opacity-60">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={marketingSources.slice(0, 4).map((s) => ({ name: s.source.slice(0, 3), leads: s.leads }))}>
-                <Line type="monotone" dataKey="leads" stroke={CHART_BLUE} strokeWidth={2} dot={false} />
+                <Line type="monotone" dataKey="leads" stroke={CHART_MAGENTA} strokeWidth={2} dot={false} />
               </LineChart>
             </ResponsiveContainer>
           </div>

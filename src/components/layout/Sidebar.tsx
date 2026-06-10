@@ -13,6 +13,8 @@ import {
   FileBarChart,
   Settings,
   X,
+  Plus,
+  Sparkles,
 } from "lucide-react";
 
 const navItems = [
@@ -37,14 +39,19 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
 
   return (
     <aside
-      className={`exec-sidebar fixed inset-y-0 left-0 z-40 flex h-screen w-[260px] shrink-0 flex-col px-4 py-6 transition-transform duration-300 ease-in-out sm:w-[272px] lg:static lg:z-auto lg:translate-x-0 ${
+      className={`exec-sidebar fixed inset-y-0 left-0 z-40 flex h-screen w-[260px] shrink-0 flex-col px-4 py-5 transition-transform duration-300 ease-in-out sm:w-[272px] lg:static lg:z-auto lg:translate-x-0 ${
         open ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
       }`}
     >
-      <div className="mb-8 flex items-start justify-between px-1">
-        <div className="min-w-0">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted">The Tailored Closet</p>
-          <h1 className="mt-1 font-serif text-xl text-gold-light">Executive BI</h1>
+      <div className="mb-6 flex items-start justify-between px-1">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent/25 to-magenta/15 ring-1 ring-accent/20">
+            <span className="text-sm font-semibold text-accent-light">O</span>
+          </div>
+          <div className="min-w-0">
+            <p className="truncate text-sm font-semibold">Owner</p>
+            <p className="text-[11px] text-muted">Admin access</p>
+          </div>
         </div>
         <button type="button" aria-label="Close menu" onClick={onClose} className="btn-ghost !p-2 lg:hidden">
           <X size={18} />
@@ -69,16 +76,20 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
         })}
       </nav>
 
-      <div className="glass-inset mt-4 p-3 shadow-inset ring-1 ring-gold/10">
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-gold/30 to-gold/10 text-sm font-semibold text-gold-light ring-1 ring-gold/25">
-            KT
-          </div>
-          <div className="min-w-0">
-            <p className="truncate text-sm font-medium">Karen Thompson</p>
-            <p className="text-xs text-muted">Owner</p>
+      <div className="mt-4 space-y-2">
+        <div className="glass-inset p-3">
+          <div className="flex items-start gap-2">
+            <Sparkles size={16} className="mt-0.5 shrink-0 text-accent-light" />
+            <div>
+              <p className="text-xs font-semibold">AI Insights</p>
+              <p className="mt-0.5 text-[11px] leading-snug text-muted">3 new recommendations ready</p>
+            </div>
           </div>
         </div>
+        <button type="button" className="glass-inset flex w-full items-center gap-2 p-3 text-left text-sm font-medium transition-colors hover:border-accent/20">
+          <Plus size={16} className="text-accent-light" />
+          New Report
+        </button>
       </div>
     </aside>
   );

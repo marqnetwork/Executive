@@ -23,12 +23,12 @@ export function PageHeader({
         <div className="min-w-0">
           {welcome ? (
             <>
-              <h1 className="font-serif text-2xl tracking-tight sm:text-3xl lg:text-4xl">{welcome}</h1>
+              <h1 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl">{welcome}</h1>
               {welcomeSubtitle && <p className="mt-2 text-sm text-muted sm:text-base">{welcomeSubtitle}</p>}
             </>
           ) : (
             <>
-              {title && <h1 className="font-serif text-2xl tracking-tight sm:text-3xl lg:text-4xl">{title}</h1>}
+              {title && <h1 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl">{title}</h1>}
               {description && <p className="mt-2 max-w-2xl text-sm text-muted sm:text-base">{description}</p>}
             </>
           )}
@@ -42,7 +42,7 @@ export function PageHeader({
                   <Calendar size={16} />
                   June 2026
                 </button>
-                <button type="button" aria-label="Notifications" className="btn-ghost !p-2.5">
+                <button type="button" aria-label="Notifications" className="btn-ghost !p-2.5 lg:hidden">
                   <Bell size={18} />
                 </button>
               </>

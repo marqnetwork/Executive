@@ -69,7 +69,7 @@ export default function ReportsPage() {
                 <span className="font-medium">{s.stage}</span>
                 <div className="flex items-center gap-4 text-sm">
                   <span className="text-muted">{s.count} count</span>
-                  <span className="badge badge-gold">{s.conversion}%</span>
+                  <span className="badge badge-accent">{s.conversion}%</span>
                 </div>
               </div>
             ))}
@@ -93,7 +93,7 @@ export default function ReportsPage() {
                   <p className="text-xs text-muted">${s.spend.toLocaleString()} spend · {s.leads} leads</p>
                 </div>
                 <div className="text-right">
-                  <p className="font-semibold text-gold-light">${s.revenue.toLocaleString()}</p>
+                  <p className="font-semibold text-accent-light">${s.revenue.toLocaleString()}</p>
                   <p className="text-xs text-muted">{s.spend > 0 ? `${Math.round(s.revenue / s.spend)}x ROI` : "—"}</p>
                 </div>
               </div>
@@ -119,7 +119,7 @@ export default function ReportsPage() {
                   <p className="text-xs text-muted">{p.type} · {p.designer}</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="badge badge-gold">{p.stage}</span>
+                  <span className="badge badge-accent">{p.stage}</span>
                   <span className="font-medium">{p.valueDisplay}</span>
                 </div>
               </div>
@@ -144,7 +144,7 @@ export default function ReportsPage() {
                   <p className="text-xs text-muted">{m.role}</p>
                 </div>
                 <div className="text-right text-sm">
-                  <p className="font-semibold text-gold-light">{m.revenue > 0 ? `$${Math.round(m.revenue / 1000)}K` : "—"}</p>
+                  <p className="font-semibold text-accent-light">{m.revenue > 0 ? `$${Math.round(m.revenue / 1000)}K` : "—"}</p>
                   <p className="text-muted">{m.closeRate > 0 ? `${m.closeRate}% close` : `${m.activeProjects} projects`}</p>
                 </div>
               </div>
@@ -160,7 +160,7 @@ function ReportHeader({ title, period }: { title: string; period: string }) {
   return (
     <div className="mb-6 flex flex-col gap-2 border-b border-glassBorder pb-4 sm:flex-row sm:items-center sm:justify-between">
       <div>
-        <h3 className="font-serif text-xl">{title}</h3>
+        <h3 className="text-xl font-semibold">{title}</h3>
         <p className="text-sm text-muted">The Tailored Closet · {period}</p>
       </div>
       <p className="text-xs text-muted">Generated {new Date().toLocaleDateString()}</p>
@@ -172,7 +172,7 @@ function SummaryBox({ label, value, accent }: { label: string; value: string; ac
   return (
     <div className="glass-inset p-4">
       <p className="text-xs text-muted">{label}</p>
-      <p className={`mt-1 text-2xl font-semibold ${accent ? "text-gold-light" : ""}`}>{value}</p>
+      <p className={`mt-1 text-2xl font-semibold ${accent ? "text-accent-light" : ""}`}>{value}</p>
     </div>
   );
 }

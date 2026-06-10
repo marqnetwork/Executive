@@ -12,7 +12,7 @@ export function ProjectDrawer({ project, onClose }: { project: Project; onClose:
         <div className="border-b border-glassBorder p-6">
           <div className="flex items-start justify-between">
             <div>
-              <h3 className="font-serif text-2xl">{project.client}</h3>
+              <h3 className="text-2xl font-bold">{project.client}</h3>
               <p className="mt-1 text-muted">{project.type}</p>
             </div>
             <button onClick={onClose} className="btn-ghost !p-2"><X size={20} /></button>
@@ -36,7 +36,7 @@ export function ProjectDrawer({ project, onClose }: { project: Project; onClose:
           <section>
             <h4 className="text-xs font-medium uppercase tracking-wider text-muted">Project Details</h4>
             <div className="mt-3 grid grid-cols-2 gap-2 text-sm">
-              <div className="glass-inset p-3"><p className="text-muted">Value</p><p className="font-semibold text-gold-light">{project.valueDisplay}</p></div>
+              <div className="glass-inset p-3"><p className="text-muted">Value</p><p className="font-semibold text-accent-light">{project.valueDisplay}</p></div>
               <div className="glass-inset p-3"><p className="text-muted">Designer</p><p className="font-semibold">{project.designer}</p></div>
               {project.installDate && (
                 <div className="glass-inset p-3"><p className="text-muted">Install</p><p className="font-semibold">{project.installDate}</p></div>
