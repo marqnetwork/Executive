@@ -75,7 +75,7 @@ export default function OverviewPage() {
   return (
     <AppShell>
       <PageHeader
-        welcome="Welcome back 👋"
+        welcome="Welcome Dolly 👋"
         welcomeSubtitle="Here's your business overview for June 2026"
       />
 

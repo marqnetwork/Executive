@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import {
   LayoutDashboard,
   TrendingUp,
@@ -22,20 +23,30 @@ const navItems = [
   { href: "/marketing", label: "Growth", icon: TrendingUp },
   { href: "/sales", label: "Revenue", icon: DollarSign },
   { href: "/projects", label: "Projects", icon: FolderKanban },
-  { href: "/projects", label: "Operations", icon: Settings2, matchPaths: ["/projects"] },
-  { href: "/team", label: "People", icon: Users, matchPaths: ["/team"] },
-  { href: "/marketing", label: "Insights", icon: Lightbulb, matchPaths: ["/marketing"] },
+  { href: "/projects", label: "Operations", icon: Settings2 },
+  { href: "/team", label: "People", icon: Users },
+  { href: "/marketing", label: "Insights", icon: Lightbulb },
   { href: "/reports", label: "Reports", icon: FileBarChart },
   { href: "/settings", label: "Settings", icon: Settings },
 ];
 
-function isActive(pathname: string, href: string, matchPaths?: string[]) {
-  const paths = matchPaths ?? [href];
-  return paths.some((p) => pathname === p || pathname.startsWith(p + "/"));
+function matchesPath(pathname: string, href: string) {
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+function getActiveLabel(pathname: string) {
+  return navItems.find((item) => matchesPath(pathname, item.href))?.label;
 }
 
 export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
   const pathname = usePathname();
+  const [selectedLabel, setSelectedLabel] = useState<string | null>(null);
+
+  useEffect(() => {
+    setSelectedLabel(null);
+  }, [pathname]);
+
+  const activeLabel = selectedLabel ?? getActiveLabel(pathname);
 
   return (
     <aside
@@ -61,12 +72,15 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
       <nav className="flex-1 space-y-0.5 overflow-y-auto">
         {navItems.map((item) => {
           const Icon = item.icon;
-          const active = isActive(pathname, item.href, item.matchPaths);
+          const active = activeLabel === item.label;
           return (
             <Link
               key={item.label}
               href={item.href}
-              onClick={onClose}
+              onClick={() => {
+                setSelectedLabel(item.label);
+                onClose();
+              }}
               className={`exec-nav-item ${active ? "exec-nav-active" : ""}`}
             >
               <Icon size={17} strokeWidth={active ? 2.25 : 1.75} />
